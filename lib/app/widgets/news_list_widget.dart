@@ -6,10 +6,10 @@ import 'package:test_news/styles/colors.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class NewsListWidget extends StatelessWidget {
-  List<NewsModel> newsList;
-  PagingController<int, NewsModel> pagingController;
-  Future<void> Function() onRefresh;
-  NewsListWidget({
+  final List<NewsModel> newsList;
+  final PagingController<int, NewsModel> pagingController;
+  final Future<void> Function() onRefresh;
+  const NewsListWidget({
     super.key,
     required this.newsList,
     required this.pagingController,

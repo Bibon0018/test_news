@@ -39,26 +39,24 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ),
-        body: Obx(
-          () => TabBarView(
-            children: [
-              NewsListWidget(
-                newsList: controller.feed.value,
-                pagingController: controller.pagingFeedController,
-                onRefresh: () => controller.getNewsList(NewsType.feed),
-              ),
-              NewsListWidget(
-                newsList: controller.top.value,
-                pagingController: controller.pagingTopController,
-                onRefresh: () => controller.getNewsList(NewsType.top),
-              ),
-              NewsListWidget(
-                newsList: controller.article.value,
-                pagingController: controller.pagingArticleController,
-                onRefresh: () => controller.getNewsList(NewsType.article),
-              ),
-            ],
-          ),
+        body: TabBarView(
+          children: [
+            NewsListWidget(
+              newsList: controller.feed,
+              pagingController: controller.pagingFeedController,
+              onRefresh: () => controller.getNewsList(NewsType.feed),
+            ),
+            NewsListWidget(
+              newsList: controller.top,
+              pagingController: controller.pagingTopController,
+              onRefresh: () => controller.getNewsList(NewsType.top),
+            ),
+            NewsListWidget(
+              newsList: controller.article,
+              pagingController: controller.pagingArticleController,
+              onRefresh: () => controller.getNewsList(NewsType.article),
+            ),
+          ],
         ),
       ),
     );

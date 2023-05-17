@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:test_news/app/widgets/fullscreen_image_widget.dart';
 import 'package:test_news/app/widgets/skeleton_container.dart';
 import 'package:test_news/styles/colors.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html_iframe/flutter_html_iframe.dart';
 import '../controllers/news_detail_controller.dart';
-import 'package:skeleton_text/skeleton_text.dart' as sm;
 
 Future<void> showNewsDetail(String id) async {
   final controller = NewsDetailController(Get.find(), id);
@@ -103,14 +103,28 @@ class NewsDetailView extends GetView<NewsDetailController> {
               controller: controller.pageController,
               children: [
                 ...controller.newsDetail.value!.gallery.map(
-                  (e) => Image.network(e.bigImg),
+                  (e) => InkWell(
+                    onTap: () async {
+                      await goFullScreen(
+                          controller.newsDetail.value!.gallery
+                              .map((e) => e.bigImg)
+                              .toList(),
+                          controller.currentPage);
+                      controller.pageController
+                          .jumpToPage(controller.currentPage.value);
+                    },
+                    child: Image.network(e.smallImg),
+                  ),
                 )
               ],
             ),
           ),
         if (controller.newsDetail.value!.gallery.length > 1)
-          Text(
-              "${controller.currentPage.value + 1} из ${controller.newsDetail.value!.gallery.length}")
+          Align(
+              alignment: Alignment.center,
+              child: Text(
+                "${controller.currentPage.value + 1} из ${controller.newsDetail.value!.gallery.length}",
+              )).paddingSymmetric(vertical: 16)
       ];
 
   List<Widget> buildSkeleton(BuildContext context) => [

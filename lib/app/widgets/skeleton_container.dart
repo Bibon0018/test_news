@@ -5,22 +5,29 @@ class SkeletonContainer extends StatelessWidget {
   final double width;
   final double height;
   final BorderRadius borderRadius;
-  Color? color;
+  final Color? color;
+  const SkeletonContainer({
+    Key? key,
+    required this.width,
+    required this.height,
+    required this.borderRadius,
+    this.color,
+  }) : super(key: key);
 
-  SkeletonContainer._({
+  const SkeletonContainer._({
     this.width = double.infinity,
     this.height = double.infinity,
     this.borderRadius = const BorderRadius.all(Radius.circular(0)),
     this.color,
   });
 
-  SkeletonContainer.square({
+  const SkeletonContainer.square({
     required double width,
     required double height,
     Color? color,
   }) : this._(width: width, height: height, color: color);
 
-  SkeletonContainer.rounded({
+  const SkeletonContainer.rounded({
     required double width,
     required double height,
     BorderRadius borderRadius = const BorderRadius.all(Radius.circular(12)),
